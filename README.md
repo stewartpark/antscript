@@ -64,6 +64,7 @@ BSD license
     public class OtherJavaProject { 
       public static void main(String[] args){
            AntScriptCore core = new AntScriptCore();
+           (new AntScriptDefaultRuntime()).setUp(core); // Standard library
            // add new function which just returns 321L.
            core.addFunction("test_function", new AntScriptFunction() {
               public Object body(Object[] args) {
