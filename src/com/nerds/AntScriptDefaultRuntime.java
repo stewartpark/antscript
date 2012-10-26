@@ -7,6 +7,12 @@ import java.util.regex.Pattern;
 
 class AntScriptDefaultRuntime extends AntScriptRuntime {
 	public void setUp(AntScriptCore ar) {
+		ar.addFunction("version", new AntScriptFunction(ar) {
+			public Object body(Object[] args){
+				return AntScriptCore.VERSION_MAJOR + "." + AntScriptCore.VERSION_MINOR;
+			}
+		}); 
+		
 		ar.addFunction("import", new AntScriptFunction (ar) {
 			public Object body(Object[] args) {
 				String jar = "";
