@@ -1222,7 +1222,7 @@ public class AntScriptCore {
 		this.errorCode = errorCode;
 	}
 	
-	public void loadJar(String path, String classpath) {
+	public boolean loadJar(String path, String classpath, boolean justTry) {
 		File file = new File(path);
 		try {    
 			URL[] jarfile = {new URL("jar", "","file:" + file.getAbsolutePath()+"!/") };    
@@ -1251,24 +1251,25 @@ public class AntScriptCore {
 				});
 			}
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+			if(justTry) return false;
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+			if(justTry) return false;
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
+			if(justTry) return false;
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			if(justTry) return false;
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			if(justTry) return false;
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
+			if(justTry) return false;
 			e.printStackTrace();
 		}
+		return true;
 	}
 	
 }
