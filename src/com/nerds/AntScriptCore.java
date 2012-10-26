@@ -19,6 +19,9 @@ class AntScriptBreak extends Exception{}
 class AntScriptContinue extends Exception{}
 
 public class AntScriptCore {
+	public static int VERSION_MAJOR = 0;
+	public static int VERSION_MINOR = 1;
+	
 	private String source;
 	private int curPos;
 	private AntScriptMemory runtime;
