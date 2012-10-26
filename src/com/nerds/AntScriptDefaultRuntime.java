@@ -24,7 +24,20 @@ class AntScriptDefaultRuntime extends AntScriptRuntime {
 				return new Long(0);
 			}
 		});
-
+		
+		ar.addFunction("exec_file", new AntScriptFunction(ar) {
+			public Object body(Object[] args){
+				try {
+					this.core.runFile(args[0].toString());
+				} catch (AntScriptException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return new Long(0);
+			}
+		}); 
+		
 		ar.addFunction("exec", new AntScriptFunction(ar) {
 			public Object body(Object[] args){
 				try {
@@ -35,6 +48,17 @@ class AntScriptDefaultRuntime extends AntScriptRuntime {
 				return new Long(0);
 			}
 		}); 
+		
+		ar.addFunction("quit", new AntScriptFunction(ar) {
+			public Object body(Object[] args){
+				if(args.length == 0)
+					System.exit(0);
+				else
+					System.exit(Integer.parseInt(args[0].toString()));
+				return new Long(0);
+			}
+		}); 
+		
 		ar.addFunction("print", new AntScriptFunction() {
 			public Object body(Object[] args){
 				System.out.println(args[0].toString());
