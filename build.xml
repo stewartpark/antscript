@@ -52,4 +52,13 @@
             <classpath refid="antscript.classpath"/>
         </java>
     </target>
+    <target name="jar">
+        <jar destfile="ants.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="com.nerds.AntScriptMain"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="bin"/>
+        </jar>
+    </target>
 </project>
