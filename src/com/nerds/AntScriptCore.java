@@ -24,7 +24,7 @@ public class AntScriptCore {
 	
 	private String source;
 	private int curPos;
-	private AntScriptMemory runtime;
+	private AntScriptMemory mem = new AntScriptMemory();
 	private int errorCode = 0;
 	private static final int CONDITIONED = 0;
 	private static final int NOT_CONDITIONED = 1;
@@ -516,7 +516,7 @@ public class AntScriptCore {
 			case Token.TOKEN_IDENT:
 				try {
 					if(_state == CONDITIONED)
-						return this.runtime.vars.get(t.text);
+						return this.mem.vars.get(t.text);
 					else 
 						return false;
 				} catch(Exception e){
@@ -551,7 +551,7 @@ public class AntScriptCore {
 								if(_state == CONDITIONED) {
 									AntScriptFunction func;
 									try{
-										func = (AntScriptFunction)this.runtime.vars.get(func_name.text);
+										func = (AntScriptFunction)this.mem.vars.get(func_name.text);
 										Object[] args = new Object[params.size()];
 										params.toArray(args); 
 										return func.body(args);
@@ -940,7 +940,7 @@ public class AntScriptCore {
 			if(ident.token == Token.TOKEN_IDENT ) {
 				if(nextToken().token == Token.TOKEN_EQ){ 
 					if(_state == CONDITIONED)
-						this.runtime.vars.put(ident.text, expr());
+						this.mem.vars.put(ident.text, expr());
 					return true;
 					
 				}
@@ -1176,17 +1176,14 @@ public class AntScriptCore {
 		}
 	}
 	
-	public AntScriptCore() {
-		this.runtime = new AntScriptMemory();
-	}
 	public void addVariable(String name, Object value) {
-		this.runtime.vars.put(name, value);
+		this.mem.vars.put(name, value);
 	}
 	public void addFunction(String name, AntScriptFunction func) {
-		this.runtime.vars.put(name, func);
+		this.mem.vars.put(name, func);
 	}
 	public Object getVariable(String name){
-		return this.runtime.vars.get(name);
+		return this.mem.vars.get(name);
 	}
 	
 	public boolean run(String source) throws AntScriptException{
