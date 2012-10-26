@@ -5,7 +5,7 @@ import java.net.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class AntScriptDefaultRuntime extends AntScriptRuntime {
+public class AntScriptDefaultRuntime extends AntScriptRuntime {
 	public void setUp(AntScriptCore ar) {
 		ar.addFunction("version", new AntScriptFunction(ar) {
 			public Object body(Object[] args){
