@@ -29,7 +29,7 @@ public class AntScriptMain {
 				}
 			}
 			
-		} else if(args.length > 0) {
+		} else {
 			for(int i = 0;i < args.length; i++){
 				try {
 					core.runFile(args[i]);
@@ -41,8 +41,6 @@ public class AntScriptMain {
 					e.printStackTrace();
 				}
 			}
-		} else {
-			System.err.println("Usage: java -jar ants.jar [script]");
 		}
 	}
 }

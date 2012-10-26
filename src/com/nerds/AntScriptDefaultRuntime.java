@@ -85,7 +85,7 @@ class AntScriptDefaultRuntime extends AntScriptRuntime {
 		});
 		ar.addFunction("match", new AntScriptFunction(){
 			public Object body(Object[] args) {
-				return (Boolean)(args[1].toString().matches(args[0].toString()));
+				return (Boolean)(args[1].toString().contains(args[0].toString()));
 			}
 		});
 		ar.addFunction("replace", new AntScriptFunction(){
