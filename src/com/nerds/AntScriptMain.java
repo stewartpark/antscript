@@ -14,7 +14,22 @@ public class AntScriptMain {
 		AntScriptCore core = new AntScriptCore();
 		(new AntScriptDefaultRuntime()).setUp(core);
 
-		if(args.length > 0) {
+		if(args.length == 0) { 
+			System.out.println("AntScript (Core " + AntScriptCore.VERSION_MAJOR + "." + AntScriptCore.VERSION_MINOR + ")");
+			InputStreamReader converter = new InputStreamReader(System.in);
+			BufferedReader in = new BufferedReader(converter);
+			while(true) {
+				System.out.print(">>> ");
+				try {
+					core.run(in.readLine());
+				} catch (AntScriptException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					break;
+				}
+			}
+			
+		} else if(args.length > 0) {
 			for(int i = 0;i < args.length; i++){
 				try {
 					core.runFile(args[i]);
