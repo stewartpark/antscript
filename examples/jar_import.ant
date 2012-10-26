@@ -1,0 +1,5 @@
+#!/usr/bin/java -jar ants.jar
+
+@import('testlib.jar', 'com.ants.testlib.main');
+@test('User parameter from antscript.');
+
