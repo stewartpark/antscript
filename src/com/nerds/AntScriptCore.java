@@ -1118,12 +1118,12 @@ public class AntScriptCore {
 		this.curPos = fallback;
 		return false;
 	}
-	private void semi_colon(){
+	private void semi_colon(boolean force){
 		int fallback = this.curPos;
 		try {
 			if(nextToken().token == Token.TOKEN_SEMICOLON) {
-			//}else {
-			//	System.err.println("Syntax Error: semi-colon(;) is missing.");
+			}else if(force){
+				System.err.println("Syntax Error: semi-colon(;) is missing.");
 				return;
 			}
 		}catch(Exception e){
@@ -1135,36 +1135,36 @@ public class AntScriptCore {
 	private void stmt() throws AntScriptBreak, AntScriptContinue{
 		Exception dl = null;
 		while(true){
-			if(stmt_assign()){ semi_colon(); continue; }
+			if(stmt_assign()){ semi_colon(true); continue; }
 			try {
 				if(stmt_if()) continue;
 			} catch(AntScriptBreak e){
-				semi_colon();
+				semi_colon(false);
 				if(_state == CONDITIONED && dl == null)
 					dl = e;
 			} catch(AntScriptContinue e){
-				semi_colon();
+				semi_colon(false);
 				if(_state == CONDITIONED && dl == null)
 					dl = e;
 			}
 			
 			if(stmt_while()) continue;
-			if(stmt_expr()) {semi_colon(); continue; }
+			if(stmt_expr()) {semi_colon(true); continue; }
 			try {
 				stmt_break();
 			} catch(AntScriptBreak e){
-				semi_colon();
+				semi_colon(true);
 				if(_state == CONDITIONED && dl == null)
 					dl = e;
 			}
 			try {
 				stmt_continue();
 			} catch(AntScriptContinue e){
-				semi_colon();
+				semi_colon(true);
 				if(_state == CONDITIONED && dl == null)
 					dl = e;
 			}
-			semi_colon();
+			semi_colon(false);
 			break;
 		}
 		if(dl != null) {
