@@ -21,7 +21,7 @@ class AntScriptContinue extends Exception{}
 public class AntScriptCore {
 	private String source;
 	private int curPos;
-	private AntScriptRuntime runtime;
+	private AntScriptMemory runtime;
 	private int errorCode = 0;
 	private static final int CONDITIONED = 0;
 	private static final int NOT_CONDITIONED = 1;
@@ -33,6 +33,7 @@ public class AntScriptCore {
 	public static final int ERR_NO_SUCH_VAR = 4;
 	public static final int ERR_TYPE_MISMATCH = 5;
 	public static final int ERR_IO = 6;
+	public static final int ERR_USER = 7;
 	
 	
 	private class Token {
@@ -1173,7 +1174,7 @@ public class AntScriptCore {
 	}
 	
 	public AntScriptCore() {
-		this.runtime = new AntScriptRuntime();
+		this.runtime = new AntScriptMemory();
 	}
 	public void addVariable(String name, Object value) {
 		this.runtime.vars.put(name, value);

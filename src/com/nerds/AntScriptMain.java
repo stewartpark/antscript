@@ -33,10 +33,10 @@ class AntScriptDefaultRuntime {
 				}
 			}
 		}); 
-		ar.addFunction("error", new AntScriptFunction() {
+		ar.addFunction("error", new AntScriptFunction(ar) {
 			public Object body(Object[] args) {
 				System.err.println(args[0].toString());
-				//ar.errorCode = 1;
+				this.core.setErrorCode(AntScriptCore.ERR_USER);
 				return new Long(0);
 			}
 		});
@@ -120,7 +120,7 @@ class AntScriptDefaultRuntime {
 public class AntScriptMain {
 	public static void main(String[] args) {
 		AntScriptCore core = new AntScriptCore();
-		AntScriptDefaultRuntime.setUp(core);
+		//AntScriptDefaultRuntime.setUp(core);
 
 		if(args.length > 0) {
 			for(int i = 0;i < args.length; i++){

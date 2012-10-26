@@ -1,8 +1,8 @@
 package com.nerds;
 import java.util.*;
-public class AntScriptRuntime {
+public class AntScriptMemory {
 	public HashMap vars;
-	public AntScriptRuntime(){
+	public AntScriptMemory(){
 		vars = new HashMap();
 	}
 }
