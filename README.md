@@ -6,7 +6,7 @@ Tiny scripting language for Java
 ## License
 BSD license
 
-## AntScript snipets
+## AntScript snippets
 ### Importing jar files in Antscript.
  - Script
 
